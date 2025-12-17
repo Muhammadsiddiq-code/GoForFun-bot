@@ -1,26 +1,53 @@
-const TelegramBot = require("node-telegram-bot-api");
+// const TelegramBot = require("node-telegram-bot-api");
 
-const token = "8380495575:AAHCycD6THUQ4e4I34mlcNPQjJRm0kHNV0s"; // O'zingizning botingiz bilan almashtiring token const
-bot = new TelegramBot(token, { polling: true });
+// const token = "8380495575:AAHCycD6THUQ4e4I34mlcNPQjJRm0kHNV0s"; // O'zingizning botingiz bilan almashtiring token const
+// bot = new TelegramBot(token, { polling: true });
 
-const inlineKeyboard = [
-  [
-    {
-      text: "Open web app",
-      web_app: { url: "https://goforfun.vercel.app/" },
-    },
-  ],
-];  
+// const inlineKeyboard = [
+//   [
+//     {
+//       text: "Open web app",
+//       web_app: { url: "https://goforfun.vercel.app/" },
+//     },
+//   ],
+// ];
+
+// // bot.on("message", (msg) => {
+// //   const chatId = msg.chat.id;
+// //   const messageText = msg.text;
+// //   if (messageText === "/start") {
+// //       bot.sendMessage(chatId, "Assalomu aleykum Botga xush kelibsiz!", {
+// //           reply_markup: {
+// //               inline_keyboard: inlineKeyboard
+// //           }
+// //       });
+// //   }
+// // });
+
+
+
+
+
+
+
+
 
 // bot.on("message", (msg) => {
 //   const chatId = msg.chat.id;
-//   const messageText = msg.text;
-//   if (messageText === "/start") {
-//       bot.sendMessage(chatId, "Assalomu aleykum Botga xush kelibsiz!", {
-//           reply_markup: {
-//               inline_keyboard: inlineKeyboard
-//           }
-//       });
+//   const text = msg.text;
+
+//   if (text === "/start") {
+//     const firstName = msg.from.first_name || "foydalanuvchi";
+
+//     bot.sendMessage(
+//       chatId,
+//       `Assalomu alaykum, ${firstName}! 👋\nBotga xush kelibsiz.`,
+//       {
+//         reply_markup: {
+//           inline_keyboard: inlineKeyboard,
+//         },
+//       }
+//     );
 //   }
 // });
 
@@ -32,21 +59,41 @@ const inlineKeyboard = [
 
 
 
-bot.on("message", (msg) => {
+
+
+
+
+
+
+
+
+
+
+
+
+
+const TelegramBot = require("node-telegram-bot-api");
+
+// Tokenni .env fayldan yoki shu yerga yozing
+const token = "8380495575:AAHCycD6THUQ4e4I34mlcNPQjJRm0kHNV0s";
+const bot = new TelegramBot(token, { polling: true });
+
+// Foydalanuvchi start bosganda
+bot.onText(/\/start/, (msg) => {
   const chatId = msg.chat.id;
-  const text = msg.text;
 
-  if (text === "/start") {
-    const firstName = msg.from.first_name || "foydalanuvchi";
-
-    bot.sendMessage(
-      chatId,
-      `Assalomu alaykum, ${firstName}! 👋\nBotga xush kelibsiz.`,
-      {
-        reply_markup: {
-          inline_keyboard: inlineKeyboard,
-        },
-      }
-    );
-  }
+  bot.sendMessage(chatId, "WebAppni ochish uchun pastdagi tugmani bosing:", {
+    reply_markup: {
+      inline_keyboard: [
+        [
+          {
+            text: "Start", // Tugma matni
+            web_app: {
+              url: "https://goforfun-bot.vercel.app", // Sizning WebApp URL
+            },
+          },
+        ],
+      ],
+    },
+  });
 });

@@ -3,24 +3,115 @@
 
 <head>
     <meta charset="UTF-8" />
-    <title>Telegram WebApp | Profile</title>
-
-    <!-- Telegram WebApp SDK -->
+    <title>Telegram Profile</title>
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f4f6f8;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            min-height: 100vh;
+            padding: 20px;
+        }
 
-    <link rel="stylesheet" href="./style.css" />
+        .profile-card {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            width: 100%;
+            max-width: 400px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .profile-card img {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            display: block;
+            margin: 0 auto 15px;
+        }
+
+        .profile-card div {
+            margin-bottom: 10px;
+        }
+
+        form input {
+            width: 100%;
+            padding: 8px;
+            margin-top: 4px;
+            margin-bottom: 12px;
+            border-radius: 6px;
+            border: 1px solid #ccc;
+        }
+
+        form button {
+            padding: 10px 15px;
+            background: #0088cc;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+
+        form button:hover {
+            background: #006699;
+        }
+    </style>
 </head>
 
 <body>
-    <div class="container">
-        <h1>Profil</h1>
 
-        <div id="profile" class="profile-card">
-            <p>Yuklanmoqda...</p>
-        </div>
+    <div class="profile-card" id="profile">
+        <p>Ma’lumot yuklanmoqda...</p>
     </div>
 
-    <script src="./app.js"></script>
+    <script>
+        const tg = window.Telegram.WebApp;
+        tg.ready();
+
+        const profileDiv = document.getElementById("profile");
+        const user = tg.initDataUnsafe?.user;
+
+        if (!user) {
+            profileDiv.innerHTML = `<p>Bu sahifaga faqat Telegram bot orqali kiriladi.</p>`;
+        } else {
+            profileDiv.innerHTML = `
+        <img src="${user.photo_url || 'https://via.placeholder.com/100'}" alt="Avatar" />
+        <div><strong>Ism:</strong> ${user.first_name || ""} ${user.last_name || ""}</div>
+        <div><strong>Username:</strong> @${user.username || "username yo‘q"}</div>
+        <div><strong>Telegram ID:</strong> ${user.id}</div>
+        <div><strong>Til:</strong> ${user.language_code || "yo‘q"}</div>
+
+        <form id="extraInfoForm">
+          <label>
+            Telefon raqam:
+            <input type="text" name="phone" placeholder="+998..." required />
+          </label>
+          <label>
+            Tug‘ilgan yili:
+            <input type="number" name="birthYear" placeholder="2007" required />
+          </label>
+          <button type="submit">Saqlash</button>
+        </form>
+      `;
+
+            const form = document.getElementById("extraInfoForm");
+            form.addEventListener("submit", (e) => {
+                e.preventDefault();
+                const phone = form.phone.value;
+                const birthYear = form.birthYear.value;
+
+                // Shu yerga backendga yuborish kodini qo‘yishingiz mumkin
+                console.log("Telefon:", phone);
+                console.log("Tug‘ilgan yil:", birthYear);
+
+                alert(`Ma’lumot qabul qilindi!\nTelefon: ${phone}\nTug‘ilgan yil: ${birthYear}`);
+            });
+        }
+    </script>
+
 </body>
 
 </html>
