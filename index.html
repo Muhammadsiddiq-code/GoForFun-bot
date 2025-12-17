@@ -64,7 +64,7 @@
 <body>
 
     <div class="profile-card" id="profile">
-        <p>Ma’lumot yuklanmoqda...</p>
+        <p>Malumot yuklanmoqda...</p>
     </div>
 
     <script>
@@ -80,9 +80,10 @@
             profileDiv.innerHTML = `
         <img src="${user.photo_url || 'https://via.placeholder.com/100'}" alt="Avatar" />
         <div><strong>Ism:</strong> ${user.first_name || ""} ${user.last_name || ""}</div>
-        <div><strong>Username:</strong> @${user.username || "username yo‘q"}</div>
+        <div><strong>Username:</strong> @${user.username || "username yoq"}</div>
         <div><strong>Telegram ID:</strong> ${user.id}</div>
-        <div><strong>Til:</strong> ${user.language_code || "yo‘q"}</div>
+        <div><strong>Til:</strong> ${user.language_code || "yoq"}</div>
+        <div><strong>Til:</strong> ${user.birthday || "yoq"}</div>
 
         <form id="extraInfoForm">
           <label>
@@ -90,7 +91,7 @@
             <input type="text" name="phone" placeholder="+998..." required />
           </label>
           <label>
-            Tug‘ilgan yili:
+            Tugilgan yili:
             <input type="number" name="birthYear" placeholder="2007" required />
           </label>
           <button type="submit">Saqlash</button>
@@ -105,9 +106,9 @@
 
                 // Shu yerga backendga yuborish kodini qo‘yishingiz mumkin
                 console.log("Telefon:", phone);
-                console.log("Tug‘ilgan yil:", birthYear);
+                console.log("Tugilgan yil:", birthYear);
 
-                alert(`Ma’lumot qabul qilindi!\nTelefon: ${phone}\nTug‘ilgan yil: ${birthYear}`);
+                alert(`Malumot qabul qilindi!\nTelefon: ${phone}\nTugilgan yil: ${birthYear}`);
             });
         }
     </script>

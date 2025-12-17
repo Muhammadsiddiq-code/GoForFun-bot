@@ -74,7 +74,6 @@
 
 const TelegramBot = require("node-telegram-bot-api");
 
-// Tokenni .env fayldan yoki shu yerga yozing
 const token = "8380495575:AAHCycD6THUQ4e4I34mlcNPQjJRm0kHNV0s";
 const bot = new TelegramBot(token, { polling: true });
 
@@ -87,9 +86,9 @@ bot.onText(/\/start/, (msg) => {
       inline_keyboard: [
         [
           {
-            text: "Start", // Tugma matni
+            text: "Start",
             web_app: {
-              url: "https://goforfun-bot.vercel.app", // Sizning WebApp URL
+              url: "https://goforfun-bot.vercel.app", 
             },
           },
         ],
