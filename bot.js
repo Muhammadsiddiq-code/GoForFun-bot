@@ -77,22 +77,21 @@ const TelegramBot = require("node-telegram-bot-api");
 const token = "8380495575:AAHCycD6THUQ4e4I34mlcNPQjJRm0kHNV0s";
 const bot = new TelegramBot(token, { polling: true });
 
-// Foydalanuvchi start bosganda
-bot.onText(/\/start/, (msg) => {
-  const chatId = msg.chat.id;
-
-  bot.sendMessage(chatId, "WebAppni ochish uchun pastdagi tugmani bosing:", {
-    reply_markup: {
-      inline_keyboard: [
-        [
-          {
-            text: "Start",
-            web_app: {
-              url: "https://goforfun-bot.vercel.app", 
+bot.on("message", (msg) => {
+  if (msg.text === "/start") {
+    bot.sendMessage(msg.chat.id, "Assalomu alaykum! 👋", {
+      reply_markup: {
+        inline_keyboard: [
+          [
+            {
+              text: "Open Web App",
+              web_app: {
+                url: "https://goforfun.vercel.app/",
+              },
             },
-          },
+          ],
         ],
-      ],
-    },
-  });
+      },
+    });
+  }
 });
