@@ -79,19 +79,25 @@ const bot = new TelegramBot(token, { polling: true });
 
 bot.on("message", (msg) => {
   if (msg.text === "/start") {
-    bot.sendMessage(msg.chat.id, "Assalomu alaykum! 👋", {
-      reply_markup: {
-        inline_keyboard: [
-          [
-            {
-              text: "Open Web App",
-              web_app: {
-                url: "https://goforfun.vercel.app/",
+        const firstName = msg.from.first_name || "foydalanuvchi";
+
+    bot.sendMessage(
+      msg.chat.id,
+      `Assalomu alaykum ${firstName} 👋 Botga xush kelibsiz. Sizni korib turganimizdan mamnunmiz.`,
+      {
+        reply_markup: {
+          inline_keyboard: [
+            [
+              {
+                text: "Open GoforFun",
+                web_app: {
+                  url: "https://goforfun.vercel.app",
+                },
               },
-            },
+            ],
           ],
-        ],
-      },
-    });
+        },
+      }
+    );
   }
 });
